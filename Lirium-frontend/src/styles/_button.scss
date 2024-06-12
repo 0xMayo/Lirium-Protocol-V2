@@ -1,0 +1,31 @@
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    rgb(226, 112, 112),
+    purple,
+    rgba(0, 0, 0, 0.929)
+  );
+  color: wheat;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background: linear-gradient(
+    to right,
+    rgb(255, 0, 0),
+    rgb(128, 0, 128),
+    rgb(0, 0, 0)
+  );
+}
+
+button:active {
+  background-color: black;
+}
