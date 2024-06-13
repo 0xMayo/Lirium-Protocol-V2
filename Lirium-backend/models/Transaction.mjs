@@ -1,12 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 import {verifySignature} from '../utilities/crypto-lib.mjs';
+import { REWARD_ADDRESS, MINING_REWARD } from '../config/settings.mjs';
 
 export default class Transaction {
-    constructor({ sender, recipient, amount }) {
-        this.id = uuidv4().replaceAll("-", "");
-        this.outputMap = this.createMap({ sender, recipient, amount});
-        this.input = this.createInput({ sender, outputMap: this.outputMap})
+    constructor({ sender, recipient, amount, inputMap, outputMap }) {
+      this.id = uuidv4().replaceAll('-', '');
+      this.outputMap = outputMap || this.createMap({ sender, recipient, amount });
+      this.inputMap =
+        inputMap || this.createInput({ sender, outputMap: this.outputMap });
     }
+
+    static transactionReward({ miner }) {
+        return new this({
+          inputMap: REWARD_ADDRESS,
+          outputMap: { [miner.publicKey]: MINING_REWARD },
+        });
+      }
 
     static validate(transaction) {
         const { input: { address, amount, signature }, outputMap } = transaction;
@@ -28,14 +37,21 @@ export default class Transaction {
         return true;
     }
 
-    update({ sender, recipient, amount}) {
-        if(amount > this.outputMap[sender.publicKey]) 
-            throw new Error('Amount exceeds balance');
-        
-        this.outputMap[recipient] = amount;
-        this.outputMap[sender.publicKey] = this.outputMap[sender.publicKey] - amount;
-        this.input = this.createInput({ sender, outputMap: this.outputMap});
-    }
+    update({ sender, recipient, amount }) {
+        if (amount > this.outputMap[sender.publicKey])
+          throw new Error('Amount exceeds balance!');
+    
+        if (!this.outputMap[recipient]) {
+          this.outputMap[recipient] = amount;
+        } else {
+          this.outputMap[recipient] = this.outputMap[recipient] + amount;
+        }
+    
+        this.outputMap[sender.publicKey] =
+          this.outputMap[sender.publicKey] - amount;
+    
+        this.input = this.createInput({ sender, outputMap: this.outputMap });
+      }
 
     createMap({ sender, recipient, amount}) {
         const outputMap = {};
