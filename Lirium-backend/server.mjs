@@ -1,5 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { connectDb } from './config/mongo.mjs';
+import colors from 'colors';
+import morgan from 'morgan';
 import Lirium from './models/Lirium.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
 import Wallet from './models/Wallet.mjs';
@@ -14,6 +17,8 @@ import { fileURLToPath } from 'url';
 
 
 dotenv.config({ path: './config/config.env' });
+
+connectDb();
 
 const credentials = {
     publishKey: process.env.PUBLISH_KEY,
@@ -33,7 +38,7 @@ export const pubnubServer = new PubNubServer({
 });
 
 const app = express();
-
+app.use(morgan('dev'));
 app.use(cors())
 app.use(express.json());
 
@@ -78,12 +83,16 @@ if (process.env.GENERATE_NODE_PORT === 'true') {
 
 const PORT = NODE_PORT || DEFAULT_PORT;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`.yellow.bold);
     console.log(`Root node is ${ROOT_NODE}`);
 
     if (PORT !== DEFAULT_PORT) {
         synchronizeChains();
     }
+});
 
+process.on('unhandledRejection', (err, promise) => {
+    console.log(`Error: ${err.message}`.red);
+    server.close(() => process.exit(1));
 });
