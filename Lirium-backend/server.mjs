@@ -11,7 +11,7 @@ import PubNubServer from './pubnubServer.mjs';
 import blockRouter from './routes/block-routes.mjs';
 import transactionRouter from './routes/transaction-routes.mjs';
 import authRouter from './routes/auth-routes.mjs';
-import errorHandler from './middleware/errorhandler.mjs';
+import { errorHandler } from './middleware/errorhandler.mjs';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';

@@ -1,22 +1,23 @@
-import fs from 'fs'
-import path from 'path'
+import ErrorResponse from '../models/ErrorResponse.mjs';
 
 export const errorHandler = (err, req, res, next) => {
-    const filePath = path.join(__appdir, 'logs', 'error.log')
-    err.statusCode = err.statusCode || 500
-    err.status = err.status || 'Try again, you may have made a mistake.'
+  let error = { ...err };
 
-    const message = `req: ${req.method} ${req.originalUrl} ${new Date().toLocaleTimeString()} ${err.message}\n`
+  error.message = err.message;
 
-    fs.appendFile(filePath, message, err => {
-        if (err) {
-            console.log('Error writing to log file.')
-        }
-    })
+  if (err.code === 11000) {
+    const message = `The resource already exists`;
+    error = new ErrorResponse(message, 400);
+  }
 
-    res.status(err.statusCode).json({ success: false, error: err.message })
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map((value) => value.message);
+    error = new ErrorResponse(`Information missing: ${message}`, 400);
+  }
 
-    next()
-}
-
-export default errorHandler
+  res.status(error.statusCode || 500).json({
+    success: false,
+    statusCode: error.statusCode || 500,
+    error: error.message || 'Server Error',
+  });
+};
