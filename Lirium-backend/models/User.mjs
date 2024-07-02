@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Please enter your password'],
     minlength: 6,
     select: false,
   },
@@ -57,7 +57,7 @@ userSchema.methods.generateToken = function () {
   });
 };
 
-userSchema.methods.getResetPasswordToken = function () {
+userSchema.methods.createResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(20).toString('hex');
 
   this.resetPasswordToken = crypto
@@ -67,6 +67,6 @@ userSchema.methods.getResetPasswordToken = function () {
 
   this.resetPasswordTokenExpire = Date.now() + 10 * 60 * 1000;
 
-  return resetToken;
+  return this.resetPasswordToken;
 };
 export default mongoose.model('User', userSchema);

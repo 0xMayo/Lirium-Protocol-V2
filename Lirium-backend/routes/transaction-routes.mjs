@@ -1,10 +1,11 @@
 import express from 'express';
 import { addTransaction, getTransactionPool, mineTransactions } from '../controllers/transaction-controller.mjs';
+import { protect } from '../middleware/authorization.mjs';
 
 const router = express.Router();
 
-router.route("/").post(addTransaction);
-router.route("/transactions").get(getTransactionPool);
-router.route("/mine").get(mineTransactions);
+router.post("/", protect, addTransaction);
+router.get("/transactions", protect, getTransactionPool);
+router.get("/mine", protect, mineTransactions);
 
 export default router;

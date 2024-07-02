@@ -1,8 +1,9 @@
-import express from 'express'
-import { listLiriumBlocks } from '../controllers/Lirium-controller.mjs'
+import express from 'express';
+import { listLiriumBlocks } from '../controllers/Lirium-controller.mjs';
+import { protect } from '../middleware/authorization.mjs';
 
-const router = express.Router()
+const router = express.Router();
 
-router.route('/').get(listLiriumBlocks)
+router.get('/', protect, listLiriumBlocks);
 
 export default router;

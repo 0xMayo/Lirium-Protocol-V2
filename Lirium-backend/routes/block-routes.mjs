@@ -1,8 +1,9 @@
 import express from 'express';
 import { mineBlock } from '../controllers/block-controller.mjs';
+import { protect } from '../middleware/authorization.mjs';
 
-export const router = express.Router();
+const router = express.Router();
 
-router.route('/mine').post(mineBlock)
+router.post('/mine', protect, mineBlock);
 
 export default router;
