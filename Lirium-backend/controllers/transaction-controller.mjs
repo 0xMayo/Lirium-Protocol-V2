@@ -1,4 +1,4 @@
-import {transactionPool} from "../server.mjs"
+import { transactionPool } from "../server.mjs"
 import { wallet } from "../server.mjs"
 import { lirium } from "../server.mjs"
 import Miner from "../models/Miner.mjs";

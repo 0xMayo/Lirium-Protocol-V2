@@ -1,4 +1,4 @@
-import User from '../models/User.mjs';
+import User from '../models/UserSchema.mjs';
 import ErrorResponse from '../models/ErrorResponse.mjs';
 import { asyncHandler } from '../middleware/asyncHandler.mjs';
 
