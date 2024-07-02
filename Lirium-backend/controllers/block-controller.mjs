@@ -1,26 +1,24 @@
+import { lirium, pubnubServer } from "../server.mjs";
+import { asyncHandler } from '../middleware/asyncHandler.mjs';
+import Block from '../models/BlockSchema.mjs';
 
-import { lirium, pubnubServer } from "../server.mjs"
+export const mineBlock = asyncHandler(async (req, res, next) => {
+  const data = req.body;
 
-export const mineBlock = (req, res, next) => {
+  if (!data) {
+    const err = new Error('Data is missing');
+    err.statusCode = 400;
+    throw err;
+  }
 
-    try {
-        const data = req.body
+  const block = lirium.addBlock({ data: data });
+  const blockToSave = new Block(block);
+  await blockToSave.save();
 
-        if (!data) {
-            const err = new Error('Data is missing')
-            err.statusCode = 400;
-            throw err
-        }
-        const block = lirium.addBlock({ data: data })
+  pubnubServer.broadcast();
 
-        pubnubServer.broadcast()
-
-        res.status(201).json({
-            success: true,
-            data: block
-        })
-    } catch (error) {
-        next(error)
-    }
-
-}
+  res.status(201).json({
+    success: true,
+    data: block
+  });
+});
