@@ -2,10 +2,11 @@ import { transactionPool } from "../server.mjs"
 import { wallet } from "../server.mjs"
 import { lirium } from "../server.mjs"
 import Miner from "../models/Miner.mjs";
-
 import { pubnubServer } from "../server.mjs";
+import { asyncHandler } from "../middleware/asyncHandler.mjs";
+import Transaction from '../models/TransactionSchema.mjs';
 
-export const addTransaction = (req, res, next) => {
+export const addTransaction = asyncHandler(async(req, res, next) => {
 
     const { amount, recipient} = req.body;
 
@@ -26,17 +27,17 @@ export const addTransaction = (req, res, next) => {
     pubnubServer.broadcastTransaction(transaction);
 
     res.status(201).json({ success: true, statusCode: 201, data: transaction });
-};
+});
 
-export const getTransactionPool = (req, res, next) => {
+export const getTransactionPool = asyncHandler(async(req, res, next) => {
     res.status(200).json({ success: true, statusCode: 200, data: transactionPool.transactionMap });
-};
+});
 
-export const mineTransactions = (req, res, next) => {
+export const mineTransactions = asyncHandler(async(req, res, next) => {
     const miner = new Miner({ lirium, transactionPool, wallet, pubnubServer });
   
     miner.mineTransaction();
   
     res.status(200).json({ success: true, statusCode: 200, data: "Block has been mined and added to the blockchain" });
-  };
+  });
   

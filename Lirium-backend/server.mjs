@@ -62,7 +62,7 @@ app.all('*', (req, res, next) => {
 app.use(errorHandler)
 
 
-const DEFAULT_PORT = 5001;
+const DEFAULT_PORT = 5002;
 const ROOT_NODE = `http://localhost:${DEFAULT_PORT}`;
 
 let NODE_PORT;
