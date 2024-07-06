@@ -4,7 +4,6 @@ import { lirium } from "../server.mjs"
 import Miner from "../models/Miner.mjs";
 import { pubnubServer } from "../server.mjs";
 import { asyncHandler } from "../middleware/asyncHandler.mjs";
-import Transaction from '../models/TransactionSchema.mjs';
 
 export const addTransaction = asyncHandler(async(req, res, next) => {
 

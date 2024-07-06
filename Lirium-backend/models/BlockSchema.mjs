@@ -31,6 +31,10 @@ const BlockSchema = new mongoose.Schema({
   }
 });
 
-const Block = mongoose.model('Block', BlockSchema);
+const chainSchema = new mongoose.Schema({
+  chain: [BlockSchema]
+});
 
-export default Block;
+const BlockDb = mongoose.model('BlockDb', chainSchema);
+
+export default BlockDb;

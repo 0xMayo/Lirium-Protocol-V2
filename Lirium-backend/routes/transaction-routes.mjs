@@ -5,7 +5,7 @@ import { protect } from '../middleware/authorization.mjs';
 const router = express.Router();
 
 router.post("/", protect, addTransaction);
-router.get("/transactions", protect, getTransactionPool);
+router.get("/transactions", getTransactionPool);
 router.get("/mine", protect, mineTransactions);
 
 export default router;

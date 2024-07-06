@@ -1,5 +1,7 @@
 import Block from './Block.mjs'
 import { createHash } from '../utilities/crypto-lib.mjs'
+import BlockDb from './BlockSchema.mjs'
+import mongoose from 'mongoose'
 
 
 export default class Lirium {
@@ -15,6 +17,7 @@ export default class Lirium {
 
         this.pendingTransactions = []
         this.chain.push(newBlock)
+        this.updateDatabase(this.chain)
         return newBlock
     }
 
@@ -50,6 +53,15 @@ export default class Lirium {
 
         return true;
     }
+
+    async updateDatabase(newBlock) {
+        try {
+            await BlockDb.deleteMany({});
+            const block = new BlockDb({ chain: newBlock });
+            await block.save();
+        } catch (error) {
+            console.error(error);
+        }}
 
     static isValidGenesis(block) {
         return JSON.stringify(block) === JSON.stringify(Block.genesis);
