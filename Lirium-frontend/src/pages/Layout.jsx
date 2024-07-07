@@ -12,10 +12,16 @@ export const Layout = () => {
                 <NavLink to={'/'}>Home</NavLink>
               </li>
               <li>
-                <NavLink to={'/transactions'}>transactions</NavLink>
+                <NavLink to={'/transactions'}>Transactions</NavLink>
               </li>
               <li>
                 <NavLink to={'/sendtransaction'}>Send</NavLink>
+              </li>
+              <li>
+                <NavLink to={'/signup'}>Sign Up</NavLink>
+              </li>
+              <li>
+                <NavLink to={'/login'}>Login</NavLink>
               </li>
             </ul>
           </nav>

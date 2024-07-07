@@ -6,6 +6,9 @@ import { Layout } from './src/pages/Layout';
 import SendTransaction from './src/components/SendTransaction';
 import UnderMaintenance from './src/pages/UnderMaintenance';
 import LoginForm from './src/components/LoginForm';
+import SignUpForm from './src/components/SignUpForm';
+
+
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: '/sendtransaction',
         element: <SendTransaction />,
+      },
+      {
+        path: '/signup',
+        element: <SignUpForm/>,
       },
       {
         path: '/login',
