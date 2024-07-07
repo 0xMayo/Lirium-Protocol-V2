@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { NotFound } from './src/components/Notfound';
-import { Homepage } from './src/components/Homepage';
+import { NotFound } from './src/pages/Notfound';
+import { Homepage } from './src/pages/Homepage';
 import RetrieveLiriumBlocks from './src/components/getLiriumBlocks';
-import { Layout } from './src/components/Layout';
+import { Layout } from './src/pages/Layout';
 import SendTransaction from './src/components/SendTransaction';
 import UnderMaintenance from './src/pages/UnderMaintenance';
 

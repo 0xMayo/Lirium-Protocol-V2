@@ -1,5 +1,5 @@
 import React from 'react';
-import GetOneBlock from './GetOneBlock';
+import GetOneBlock from '../components/GetOneBlock';
 
 export const Homepage = () => {
   return (
