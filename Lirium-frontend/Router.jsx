@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { NotFound } from './src/pages/Notfound';
 import { Homepage } from './src/pages/Homepage';
-import RetrieveLiriumBlocks from './src/components/getLiriumBlocks';
+import RetrieveLiriumBlocks from './src/components/GetLiriumBlocks';
 import { Layout } from './src/pages/Layout';
 import SendTransaction from './src/components/SendTransaction';
 import UnderMaintenance from './src/pages/UnderMaintenance';
+import LoginForm from './src/components/LoginForm';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: '/sendtransaction',
         element: <SendTransaction />,
+      },
+      {
+        path: '/login',
+        element: <LoginForm />,
       },
       {
         path: '/maintenance',
