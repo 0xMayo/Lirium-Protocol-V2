@@ -5,15 +5,25 @@ const RetrieveLiriumBlocks = () => {
   const [liriumBlocks, setLiriumBlocks] = useState([]);
 
   const handleLoadLiriumBlocks = async () => {
-    const blocks = await getLiriumBlocks();
-    setLiriumBlocks(blocks.data);
+    try {
+      const response = await getLiriumBlocks();
+      console.log(response);
+      
+      if (response && response.data && Array.isArray(response.data.chain)) {
+        setLiriumBlocks(response.data.chain);
+      } else {
+        console.error('Unexpected response format:', response);
+      }
+    } catch (error) {
+      console.error('Error fetching Lirium blocks:', error);
+    }
   };
 
   return (
     <div className='theWrapper'>
       <div className='buttonWrapper'>
         <h2 className='insideText'>Are you ready?</h2>
-        <h3 className='insideText'>take a look at Lirium Protocols fully secure and immutable blocks</h3>
+        <h3 className='insideText'>Take a look at Lirium Protocols fully secure and immutable blocks</h3>
         <h4 className='insideText'>Get liriumfied</h4>
         <button className='insideText' onClick={handleLoadLiriumBlocks}>
           {' '}

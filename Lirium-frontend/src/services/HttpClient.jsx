@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getLiriumBlocks = async () => {
-  const response = await axios.get('http://localhost:5001/api/v1/lirium');
+  const response = await axios.get('http://localhost:5002/api/v1/lirium');
   return response.data;
 };
 
@@ -12,16 +12,16 @@ export const sendTransaction = async (sender, recipient, amount) => {
     amount: amount
   };
 
-  const response = await axios.post('http://localhost:5001/api/v1/transaction', transactionData);
+  const response = await axios.post('http://localhost:5002/api/v1/transaction', transactionData);
   return response.data;
 };
 
 export const getTransactionPool = async () => {
-  const response = await axios.get('http://localhost:5001/api/v1/transaction/transactions');
+  const response = await axios.get('http://localhost:5002/api/v1/transaction/transactions');
   return response.data;
 };
 
 export const mineBlock = async () => {
-  const response = await axios.get('http://localhost:5001/api/v1/transaction/mine');
+  const response = await axios.get('http://localhost:5002/api/v1/transaction/mine');
   return response.data;
 };
