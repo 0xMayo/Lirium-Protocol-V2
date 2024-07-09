@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 import { connectDb } from './config/mongo.mjs';
 import colors from 'colors';
 import morgan from 'morgan';
+import ExpressMongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import rateLimit from 'express-rate-limit';
+import hpp from 'hpp';
 import Lirium from './models/Lirium.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
 import Wallet from './models/Wallet.mjs';
@@ -47,6 +52,18 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 global.__appdir = dirname
+
+app.use(ExpressMongoSanitize());
+app.use(helmet());
+app.use(xss());
+
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000,
+    max: 100
+});
+
+app.use(limiter);
+app.use(hpp());
 
 app.use('/api/v1/lirium', liriumRouter)
 app.use('/api/v1/block', blockRouter)
