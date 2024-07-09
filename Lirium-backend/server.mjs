@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import xss from 'xss-clean';
 import rateLimit from 'express-rate-limit';
 import hpp from 'hpp';
+import { securityHandler } from './middleware/securityHandler.mjs';
 import Lirium from './models/Lirium.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
 import Wallet from './models/Wallet.mjs';
@@ -16,7 +17,7 @@ import PubNubServer from './pubnubServer.mjs';
 import blockRouter from './routes/block-routes.mjs';
 import transactionRouter from './routes/transaction-routes.mjs';
 import authRouter from './routes/auth-routes.mjs';
-import { errorHandler } from './middleware/errorhandler.mjs';
+import { errorHandler } from './middleware/errorHandler.mjs';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
@@ -53,17 +54,7 @@ const dirname = path.dirname(filename)
 
 global.__appdir = dirname
 
-app.use(ExpressMongoSanitize());
-app.use(helmet());
-app.use(xss());
-
-const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000,
-    max: 100
-});
-
-app.use(limiter);
-app.use(hpp());
+securityHandler(app);
 
 app.use('/api/v1/lirium', liriumRouter)
 app.use('/api/v1/block', blockRouter)
