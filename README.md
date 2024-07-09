@@ -38,28 +38,27 @@ GET /api/v1/lirium
 Retrieves information about the current state of the Lirium Protocol network.
 Example Usage (using Postman):
 Method: GET
-URL: http://localhost:5001/api/v1/lirium
+URL: http://localhost:5002/api/v1/lirium
 POST /api/v1/transaction
 
 Adds a new transaction to the Lirium Protocol transaction pool.
 Example Usage (using Postman):
 Method: POST
-URL: http://localhost:5001/api/v1/transaction
+URL: http://localhost:5002/api/v1/transaction
 Body: (JSON format, specify transaction details)
-Server: http://localhost:5953
 
 GET /api/v1/transaction/transactions
 
 Retrieves a list of pending transactions in the Lirium Protocol transaction pool.
 Example Usage (using Postman):
 Method: GET
-URL: http://localhost:5953/api/v1/transaction/transactions
+URL: http://localhost:5002/api/v1/transaction/transactions
 GET /api/v1/transaction/mine
 
 Initiates the mining process to create a new block containing pending transactions.
 Example Usage (using Postman):
 Method: GET
-URL: http://localhost:5001/api/v1/transaction/mine
+URL: http://localhost:5002/api/v1/transaction/mine
 
 ##  Getting Started
 
