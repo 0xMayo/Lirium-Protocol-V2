@@ -5,8 +5,10 @@ import RetrieveLiriumBlocks from './src/components/GetLiriumBlocks';
 import { Layout } from './src/pages/Layout';
 import SendTransaction from './src/components/SendTransaction';
 import UnderMaintenance from './src/pages/UnderMaintenance';
-import LoginForm from './src/components/LoginForm';
-import SignUpForm from './src/components/SignUpForm';
+import SignUpPage from './src/pages/SignUpPage';
+import LoginPage from './src/pages/LoginPage';
+import Logout from './src/components/Logout';
+
 
 
 
@@ -30,11 +32,15 @@ export const router = createBrowserRouter([
       },
       {
         path: '/signup',
-        element: <SignUpForm/>,
+        element: <SignUpPage/>,
       },
       {
         path: '/login',
-        element: <LoginForm />,
+        element: <LoginPage />,
+      },
+      {
+        path: '/logout',
+        element: <Logout />,
       },
       {
         path: '/maintenance',

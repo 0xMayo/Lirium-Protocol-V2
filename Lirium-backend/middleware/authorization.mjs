@@ -14,17 +14,21 @@ export const protect = asyncHandler(async (req, res, next) => {
   }
 
   if (!token) {
-    next(new ErrorResponse('Not authorized', 401));
+    return next(new ErrorResponse('Not authorized', 401));
   }
 
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-  req.user = await User.findById(decodedToken.id);
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decodedToken.id);
 
-  if (!req.user) {
-    next(new ErrorResponse('Not authorized', 401));
+    if (!req.user) {
+      return next(new ErrorResponse('Not authorized', 401));
+    }
+
+    next();
+  } catch (error) {
+    return next(new ErrorResponse('Not authorized', 401));
   }
-
-  next();
 });
 
 export const authorize = (...roles) => {
@@ -33,7 +37,7 @@ export const authorize = (...roles) => {
       return res.status(403).json({
         success: false,
         statusCode: 403,
-        message: `The roll ${req.user.role} has no authorization`,
+        message: `The role ${req.user.role} has no authorization`,
       });
     }
     next();

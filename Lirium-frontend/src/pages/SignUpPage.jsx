@@ -1,24 +1,36 @@
-import React from 'react';
-import SignupForm from '../components/SignupForm';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SignUpForm from '../components/SignUpForm';
 import { registerUser } from '../services/HttpClient';
 
-const SignUpPage = ({ setToken }) => {
-  const handleSignup = async (credentials) => {
+const SignUpPage = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  const handleSignup = async (formData) => {
     try {
-      const response = await registerUser(credentials);
-      if (response && response.success && response.token) {
-        setToken(response.token);
+      const response = await registerUser(formData);
+      console.log('User registered:', response);
+
+      if (response.token) {
         localStorage.setItem('token', response.token);
+        navigate('/login');
       } else {
-        alert('Registration failed');
+        setError('Registration successful, but no token received. Please log in.');
       }
     } catch (error) {
-      console.error('Signup error:', error);
-      alert('Signup failed');
+      console.error('Signup failed:', error);
+      setError(error.response?.data?.message || 'An error occurred during signup. Please try again.');
     }
   };
 
-  return <SignupForm onSignup={handleSignup} />;
+  return (
+    <div>
+      <h2>Sign Up</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <SignUpForm onSignup={handleSignup} />
+    </div>
+  );
 };
 
 export default SignUpPage;

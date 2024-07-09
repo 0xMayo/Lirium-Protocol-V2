@@ -10,7 +10,6 @@ const GetOneBlock = () => {
     try {
       const response = await getLiriumBlocks();
       console.log('Fetched blocks:', response);
-      // Check if response.data.chain exists and is an array
       if (response && response.success && response.data && Array.isArray(response.data.chain)) {
         setLiriumBlocks(response.data.chain);
       } else {
