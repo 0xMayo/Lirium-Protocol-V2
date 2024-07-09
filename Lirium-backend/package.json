@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.mjs",
   "scripts": {
+    "test": "vitest",
     "dev": "nodemon server.mjs",
     "dev-node": "cross-env GENERATE_NODE_PORT='true' nodemon server.mjs"
   },
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "vitest": "^2.0.1"
   }
 }
