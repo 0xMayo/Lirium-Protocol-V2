@@ -18,6 +18,7 @@ Lirium Protocol is built using a robust combination of technologies:
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Authentication: JSON Web Tokens (JWT)
+- Real-time Communication: PubNub
 
 ## 🌟 Features
 
@@ -35,37 +36,38 @@ To interact with Lirium Protocol, you'll need:
 - npm (Node Package Manager)
 - Git
 - MongoDB (local installation or cloud service)
+- PubNub account
 
 ## 💻 API Endpoints
 
-1. **Get Blockchain Info**
+1. **Get Blockchain Info:**
    - Method: GET
    - URL: `http://localhost:5002/api/v1/lirium`
    - Description: Retrieves information about the current state of the Lirium Protocol network.
 
-2. **Add New Transaction**
+2. **Add New Transaction:**
    - Method: POST
    - URL: `http://localhost:5002/api/v1/transaction`
    - Body: JSON format, specify transaction details
    - Description: Adds a new transaction to the Lirium Protocol transaction pool.
 
-3. **Get Transaction Pool**
+3. **Get Transaction Pool:**
    - Method: GET
    - URL: `http://localhost:5002/api/v1/transaction/transactions`
    - Description: Retrieves a list of pending transactions in the Lirium Protocol transaction pool.
 
-4. **Mine Block**
+4. **Mine Block:**
    - Method: GET
    - URL: `http://localhost:5002/api/v1/transaction/mine`
    - Description: Initiates the mining process to create a new block containing pending transactions.
 
-5. **User Registration**
+5. **User Registration:**
    - Method: POST
    - URL: `http://localhost:5002/api/v1/auth/register`
    - Body: JSON format with user details (name, email, password)
    - Description: Registers a new user in the system.
 
-6. **User Login**
+6. **User Login:**
    - Method: POST
    - URL: `http://localhost:5002/api/v1/auth/login`
    - Body: JSON format with login credentials (email, password)
@@ -83,13 +85,13 @@ Getting started with Lirium Protocol is easy! Here's how:
    cd lirium-protocol
 ```
 
-2. **Install Dependencies -** Run the following command to install all the dependencies needed:
+2. **Install Dependencies:**
 
 ```bash
 npm install
 ```
 
-3. **Add a config.env file -** With the following files: 
+3. Add a **config.env** file, and add the following: 
 
 ```bash
 dotenv
@@ -108,6 +110,9 @@ JWT_COOKIE_TTL=90
 
 MONGO_URI=your_mongo_connection_string
 ```
+4. **PubNub Configuration:**
+
+To use PubNub for real-time communication, you need to set up PubNub keys. Visit the PubNub Dashboard to get your PUBLISH_KEY, SUBSCRIBE_KEY, and SECRET_KEY. Add these keys to your config.env file as shown above.
 
 ## 🤝 Contribute to Lirium Protocol
 
