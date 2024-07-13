@@ -1,6 +1,6 @@
 # <img src="Lirium-frontend\src\assets\Lirium-Protocol-Logo.png" alt="Lirium Protocol Logo" width="250px"> 
 
-Lirium Protocol: Decentralized Finance for Everyone 
+### **Lirium Protocol: Decentralized Finance for Everyone**
 
 ## 📢 Important Note
 
@@ -76,20 +76,20 @@ To interact with Lirium Protocol, you'll need:
 
 Getting started with Lirium Protocol is easy! Here's how:
 
-1. **Clone the Repository**
+1. **Clone the Repository:**
 
 ```bash
    git clone https://github.com/0xMayo/Lirium-Protocol-V2.git
    cd lirium-protocol
 ```
 
-2. **Install Dependencies**  Run the following command to install all the dependencies needed:
+2. **Install Dependencies -** Run the following command to install all the dependencies needed:
 
 ```bash
 npm install
 ```
 
-3. **Add a config.env file -** And add the following files: 
+3. **Add a config.env file -** With the following files: 
 
 ```bash
 dotenv
@@ -119,6 +119,6 @@ Lirium Protocol is an open-source project, and we welcome contributions from the
 
 Remember, Lirium Protocol is designed for educational purposes to demonstrate blockchain and DeFi concepts. It is not intended for real-world financial transactions or as a fully functional blockchain network.
 
-## Together, we can build a future of decentralized finance that empowers everyone. 
+### Together, we can build a future of decentralized finance that empowers everyone. 
 
-## Join the Lirium Protocol revolution today! 
+### Join the Lirium Protocol revolution today! 
