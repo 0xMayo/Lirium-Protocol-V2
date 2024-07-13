@@ -1,7 +1,6 @@
 import Block from './Block.mjs'
 import { createHash } from '../utilities/crypto-lib.mjs'
 import BlockDb from './BlockSchema.mjs'
-import mongoose from 'mongoose'
 
 
 export default class Lirium {
