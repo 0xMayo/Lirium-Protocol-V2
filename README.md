@@ -57,15 +57,16 @@ URL: http://localhost:5002/api/v1/transaction/mine
 
 Getting started with Lirium Protocol is easy! Here's how:
 
-1. **npm install** To install all the dependencies needed. 
-2. **Add a config.env file** [![Click to copy](https://img.shields.io/badge/Click-Copy-blue.svg?style=flat-square)](javascript:navigator.clipboard.writeText('NODE_ENV=development
+1. **npm install -** To install all the dependencies needed. 
+2. **Add a config.env file -** 
+NODE_ENV=development
 PORT=<Port you want to use>
 
 JWT_SECRET=<Your password>
 JWT_TTL=90d
 JWT_COOKIE_TTL=90
 
-MONGO_URI=<Connect to MongoDB>'))
+MONGO_URI=<Connect to MongoDB>
 
 ## 🚀 Contribute to Lirium Protocol
 
