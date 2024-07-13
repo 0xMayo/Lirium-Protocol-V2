@@ -1,6 +1,7 @@
 import User from '../models/UserSchema.mjs';
 import ErrorResponse from '../models/ErrorResponse.mjs';
 import { asyncHandler } from '../middleware/asyncHandler.mjs';
+import createAndSendToken from '../utilities/token-utils.mjs';
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
@@ -141,9 +142,3 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   createAndSendToken(user, 200, res);
 });
-
-const createAndSendToken = (user, statusCode, res) => {
-    const token = user.generateToken();
-  
-    res.status(statusCode).json({ success: true, statusCode, token });
-  };
