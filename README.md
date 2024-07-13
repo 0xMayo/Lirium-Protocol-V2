@@ -59,12 +59,12 @@ Getting started with Lirium Protocol is easy! Here's how:
 
 1. **npm install -** To install all the dependencies needed. 
 2. **Add a config.env file -** 
-NODE_ENV=development
-PORT=<Port you want to use>
+- NODE_ENV=development
+- PORT=<Port you want to use>
 
-JWT_SECRET=<Your password>
-JWT_TTL=90d
-JWT_COOKIE_TTL=90
+- JWT_SECRET=<Your password>
+- JWT_TTL=90d
+- JWT_COOKIE_TTL=90
 
 MONGO_URI=<Connect to MongoDB>
 
