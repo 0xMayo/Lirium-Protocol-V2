@@ -10,7 +10,7 @@ const SignUpPage = () => {
   const handleSignup = async (formData) => {
     try {
       const response = await registerUser(formData);
-      console.log('User registered:', response);
+      console.log('User registered successfully.');
 
       if (response.token) {
         localStorage.setItem('token', response.token);

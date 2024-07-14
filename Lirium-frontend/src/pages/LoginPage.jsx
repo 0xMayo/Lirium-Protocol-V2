@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleLogin = async (formData) => {
     try {
       const response = await loginUser(formData);
-      console.log('User logged in:', response);
+      console.log('User logged in successfully.');
       
       if (response.token) {
         localStorage.setItem('token', response.token);
